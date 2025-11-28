@@ -27,7 +27,7 @@ jobs:
 
       - name: Build app
         run: |
-          pyinstaller --onefile --windowed --name "DailyTimer" timer.py
+          pyinstaller --onefile --windowed --name "DailyTimer" --icon assets/icon.icns timer.py
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
