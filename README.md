@@ -40,3 +40,14 @@ App will be in `dist/DailyTimer.app`
 ```bash
 python3 timer.py
 ```
+
+## macOS Gatekeeper Workaround
+
+If macOS shows "Apple could not verify" warning when opening the app, run:
+
+```bash
+xattr -cr /Applications/DailyTimer.app
+```
+
+Then open the app again.
+
