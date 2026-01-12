@@ -57,10 +57,16 @@ class TimerApp:
         self.start_button.bind("<Button-1>", lambda e: self.start_timer())
         
     def format_time(self, seconds):
-        """Format seconds as MM:SS"""
-        mins = seconds // 60
-        secs = seconds % 60
-        return f"{mins}:{secs:02d}"
+        """Format seconds as MM:SS, with negative time support"""
+        if seconds < 0:
+            abs_seconds = abs(seconds)
+            mins = abs_seconds // 60
+            secs = abs_seconds % 60
+            return f"-{mins}:{secs:02d}"
+        else:
+            mins = seconds // 60
+            secs = seconds % 60
+            return f"{mins}:{secs:02d}"
     
     def start_timer(self):
         """Start or restart the timer"""
@@ -78,22 +84,23 @@ class TimerApp:
         self.countdown()
     
     def countdown(self):
-        """Countdown logic"""
-        if self.time_left > 0 and self.running:
+        """Countdown logic - continues into negative time after reaching 0"""
+        if self.running:
             self.time_label.config(text=self.format_time(self.time_left))
             
-            # Change color when low on time
-            if self.time_left <= 10:
+            # Change color based on time remaining
+            if self.time_left <= 0:
+                # Overtime - time has run out, turn red
                 self.time_label.config(fg="#ff4444")
-            elif self.time_left <= 30:
+            elif self.time_left <= 15:
+                # Warning - getting low on time, turn orange
                 self.time_label.config(fg="#ffaa00")
+            else:
+                # Normal - green
+                self.time_label.config(fg="#00ff00")
             
             self.time_left -= 1
             self.timer_id = self.root.after(1000, self.countdown)
-        else:
-            # Timer finished
-            self.time_label.config(text="0:00", fg="#ff4444")
-            self.running = False
     
     def run(self):
         """Start the app"""

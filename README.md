@@ -2,11 +2,22 @@
 
 A simple countdown timer for daily standups. Stays on top of other windows so it's visible during screen sharing.
 
+## Features
+
+- **Always on top** - Window stays visible during screen sharing
+- **Overtime tracking** - Timer continues counting into negative time after reaching zero
+- **Color indicators**:
+  - 🟢 Green: Normal countdown
+  - 🟠 Orange: Warning (15 seconds or less remaining)
+  - 🔴 Red: Overtime (time has run out)
+- **Dark theme** - Easy on the eyes
+
 ## Usage
 
 1. Open `DailyTimer.app`
 2. Click **[ Start ]** to begin countdown
 3. Click **[ Restart ]** anytime to reset
+4. When time runs out, the timer turns red and continues counting negative time
 
 ## Configuration
 
